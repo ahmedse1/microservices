@@ -1,10 +1,13 @@
 package com.example.accounts.service.impl;
 
 import com.example.accounts.constants.AccountsConstants;
+import com.example.accounts.dto.AccountsDTO;
 import com.example.accounts.dto.CustomerDTO;
 import com.example.accounts.entity.Accounts;
 import com.example.accounts.entity.Customer;
 import com.example.accounts.exception.CustomerAlreadyExistsException;
+import com.example.accounts.exception.ResourceNotFoundException;
+import com.example.accounts.mapper.AccountsMapper;
 import com.example.accounts.mapper.CustomerMapper;
 import com.example.accounts.repository.AccountsRepository;
 import com.example.accounts.repository.CustomerRepository;
@@ -24,6 +27,11 @@ public class AccountsServiceImpl implements IAccountsService {
     // to perform crud in the database
     private AccountsRepository accountsRepository;
     private CustomerRepository customerRepository;
+
+    /**
+     *
+     * @param customerDTO
+     */
     @Override
     public void createAccount(CustomerDTO customerDTO) {
         Customer customer = CustomerMapper.mapToCustomer(customerDTO, new Customer());
@@ -58,16 +66,16 @@ public class AccountsServiceImpl implements IAccountsService {
      * @param mobileNumber - Input Mobile Number
      * @return Accounts Details based on a given mobileNumber
      */
-    /*@Override
-    public CustomerDto fetchAccount(String mobileNumber) {
+    @Override
+    public CustomerDTO fetchAccount(String mobileNumber) {
         Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
                 () -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
         );
         Accounts accounts = accountsRepository.findByCustomerId(customer.getCustomerId()).orElseThrow(
                 () -> new ResourceNotFoundException("Account", "customerId", customer.getCustomerId().toString())
         );
-        CustomerDto customerDto = CustomerMapper.mapToCustomerDto(customer, new CustomerDto());
-        customerDto.setAccountsDto(AccountsMapper.mapToAccountsDto(accounts, new AccountsDto()));
+        CustomerDTO customerDto = CustomerMapper.mapToCustomerDto(customer, new CustomerDTO());
+        customerDto.setAccountsDto(AccountsMapper.mapToAccountsDto(accounts, new AccountsDTO()));
         return customerDto;
     }
 
@@ -99,7 +107,7 @@ public class AccountsServiceImpl implements IAccountsService {
 
     /**
      * @param mobileNumber - Input Mobile Number
-     * @return boolean indicating if the delete of Account details is successful or not
+     * @return boolean indicating if the deletion of Account details is successful or not
      */
     /*@Override
     public boolean deleteAccount(String mobileNumber) {
