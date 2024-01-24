@@ -83,10 +83,10 @@ public class AccountsServiceImpl implements IAccountsService {
      * @param customerDto - CustomerDto Object
      * @return boolean indicating if the update of Account details is successful or not
      */
-    /*@Override
-    public boolean updateAccount(CustomerDto customerDto) {
+    @Override
+    public boolean updateAccount(CustomerDTO customerDto) {
         boolean isUpdated = false;
-        AccountsDto accountsDto = customerDto.getAccountsDto();
+        AccountsDTO accountsDto = customerDto.getAccountsDto();
         if(accountsDto !=null ){
             Accounts accounts = accountsRepository.findById(accountsDto.getAccountNumber()).orElseThrow(
                     () -> new ResourceNotFoundException("Account", "AccountNumber", accountsDto.getAccountNumber().toString())
@@ -109,7 +109,7 @@ public class AccountsServiceImpl implements IAccountsService {
      * @param mobileNumber - Input Mobile Number
      * @return boolean indicating if the deletion of Account details is successful or not
      */
-    /*@Override
+    @Override
     public boolean deleteAccount(String mobileNumber) {
         Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
                 () -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
@@ -117,5 +117,5 @@ public class AccountsServiceImpl implements IAccountsService {
         accountsRepository.deleteByCustomerId(customer.getCustomerId());
         customerRepository.deleteById(customer.getCustomerId());
         return true;
-    }*/
+    }
 }
