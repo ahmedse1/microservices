@@ -1,0 +1,18 @@
+- Add <packaging>jar</packaging> under <version>0.0.1-SNAPSHOT</version> in pom.xml file.
+  It states that the app will be deployed as a jar file.
+
+- Delete all .class files from target folder
+
+- Open cmd on microservice path
+
+- Run 'mvn clean install' command (Maven should be installed and PATH set to env variables)
+  It will add the jar file to target folder.
+  
+- To run the microservice using Java command, type 'java -jar target/name_of_jar_file'
+  Alternatively, run maven command 'mvn spring-boot:run'
+
+- Create Dockerfile inside microservice folder and write docker commands to create the image.
+
+- Run this command 'docker build . -t ahmed097/accounts:s4' to create the docker image in docker server
+
+
