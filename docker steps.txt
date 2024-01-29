@@ -10,9 +10,60 @@
   
 - To run the microservice using Java command, type 'java -jar target/name_of_jar_file'
   Alternatively, run maven command 'mvn spring-boot:run'
+  
+  FIRST METHOD: Using DockerFile
 
 - Create Dockerfile inside microservice folder and write docker commands to create the image.
 
 - Run this command 'docker build . -t ahmed097/accounts:s4' to create the docker image in docker server
+
+- To create a docker container from the docker image, run 'docker run -d -p 8080:8080 ahmed097/accounts:s4'
+  -d indicates that the container will run in detached mode, means developer can run other docker commands while
+  container is running.
+  
+  SECOND METHOD: Using BuildPack
+  
+  Buildpack is a library that uses Heroku and Pivotal and it helps to create docker images without creating a docker file and writing all the commands manually.
+  
+  - Add image name under the configuration tag in pom.xml.
+        <image>
+						<name>ahmed097/${project.artifactId}:s4</name>
+					</image>
+	
+	- Run a command 'mvn spring-boot:build-image'. This command will download buildpack library files and create docker image.
+	
+	- Use the same command mentioned above to create the docker container
+  
+  
+  THIRD METHOD: Using Google gib
+  
+  More optimized way to create docker images of our Java apps. Traditionally a Java application is built as a single image layer with the application JAR,
+  Jib's build strategy separates the Java application into multiple layers for more granular incremental builds. When you change your code, only your changes are rebuilt,
+  not your entire application. 
+  
+  Add the following in pom.xml under <plugins>
+  
+    <plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.4.0</version>
+				<configuration>
+					<to>
+						<image>ahmed097/${project.artifactId}:s4</image>
+					</to>
+				</configuration>
+		</plugin>
+		
+	- Run a command 'mvn compile jib:dockerBuild' to create docker image.
+	
+	- Use the same command mentioned above to create the docker container.
+	
+	
+	
+=== PUSH LOCAL IMAGES TO DOCKER REMOTE REPOSITORY ===
+
+- Run the command 'docker image push docker.io/ahmed097/accounts:s4'
+  
+  
 
 
