@@ -63,7 +63,13 @@
 === PUSH LOCAL IMAGES TO DOCKER REMOTE REPOSITORY ===
 
 - Run the command 'docker image push docker.io/ahmed097/accounts:s4'
-  
-  
+
+
+=== DOCKER COMPOSE ===
+
+
+Docker compose is used to run all the docker containers mentioned in docker-compose.yml file at once by using a command.
+
+    'docker compose up -d'
 
 
