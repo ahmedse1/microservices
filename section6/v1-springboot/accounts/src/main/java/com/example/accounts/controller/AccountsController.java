@@ -2,12 +2,12 @@ package com.example.accounts.controller;
 
 
 import com.example.accounts.constants.AccountsConstants;
+import com.example.accounts.dto.AccountsContactInfoDTO;
 import com.example.accounts.dto.CustomerDTO;
 import com.example.accounts.dto.ResponseDTO;
 import com.example.accounts.service.IAccountsService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -38,8 +38,11 @@ public class AccountsController {
     private String buildVersion;
 
     // Environment is used to read properties of our local environment variables
-    @Autowired
+    @Autowired //using this annotation, we don't have to inject the property in the constructor, like we did for IAccountsService
     private Environment environment;
+
+    @Autowired
+    private AccountsContactInfoDTO accountsContactInfoDTO;
 
     @PostMapping("/create")
     public ResponseEntity<ResponseDTO> create(@Valid @RequestBody CustomerDTO customerDTO) {
@@ -94,5 +97,10 @@ public class AccountsController {
     @GetMapping("/java-version")
     public ResponseEntity<String> getJavaVersion() {
         return ResponseEntity.status(HttpStatus.OK).body(environment.getProperty("JAVA_HOME"));
+    }
+
+    @GetMapping("/contact-info")
+    public ResponseEntity<AccountsContactInfoDTO> getContactInfo() {
+        return ResponseEntity.status(HttpStatus.OK).body(accountsContactInfoDTO);
     }
 }
