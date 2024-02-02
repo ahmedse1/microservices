@@ -60,21 +60,6 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<image>
-						<name>ahmed097/${project.artifactId}:s4</name>
-					</image>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
 			<!-- Need to add this plugin when creating docker images using Google gib -->
 			<plugin>
 				<groupId>com.google.cloud.tools</groupId>
@@ -82,7 +67,7 @@
 				<version>3.4.0</version>
 				<configuration>
 					<to>
-						<image>ahmed097/${project.artifactId}:s4</image>
+						<image>ahmed097/${project.artifactId}:s6</image>
 					</to>
 				</configuration>
 			</plugin>
