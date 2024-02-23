@@ -7,10 +7,10 @@ spring:
     username: root
     password: root
   jpa:
-    show-sql: true
+    show-sql: true      # it specifies that the sql commands will be shown in the console while running the application
   sql:
     init:
-      mode: always
+      mode: always      # it specifies that the application should always look for schema.sql file to execute the sql commands mentioned in it
 
 build:
   version: "1.0"
